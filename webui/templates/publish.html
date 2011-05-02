@@ -1,0 +1,34 @@
+# -*- coding: utf-8 -*-
+<%!
+  nav_selection = 'publish'
+  main_title = 'vocab.ox - Publish vocabs'
+%>
+<%inherit file="/base.html" />
+
+<%def name="flash()">
+    % if session.has_key('welcome_flash'):
+        <div id="flash" class="flash">
+        <p>${session.get('welcome_flash') | n}</p><p>&nbsp;</p>
+        </div><p>&nbsp;</p>
+        <%
+            del session['welcome_flash']
+            session.save()
+        %>
+    % endif
+</%def>
+% if c.message:
+  <div class="flash">${c.message | n}</div>
+% endif
+
+${self.flash()}
+<%include file="/included_files/create_vocab.html"/>
+<p>&nbsp;</p>
+<hr/>
+<p>&nbsp;</p>
+<h2><a href="/update/${c.user_det['userid']}">Update details for ${c.user_det['name']}</a></h2>
+<p>&nbsp;</p>
+<hr/>
+<p>&nbsp;</p>
+<%include file="/included_files/list_of_vocabs_publish.html"/>
+
+<p>&nbsp;</p>

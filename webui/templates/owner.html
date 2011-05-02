@@ -1,0 +1,18 @@
+# -*- coding: utf-8 -*-
+
+<%!
+  nav_selection = ''
+  main_title = 'vocab.ox - owners'
+%>
+<%inherit file="/base.html" />
+
+% if c.message:
+  <div class="flash">${c.message | n}</div>
+% endif
+
+<%
+c.show_userid = False
+%>
+<%include file="/included_files/owner_details.html"/>
+<p>&nbsp;</p>
+<%include file="/included_files/list_of_vocabs_owner.html"/>

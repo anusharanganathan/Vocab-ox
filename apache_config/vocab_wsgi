@@ -1,0 +1,20 @@
+<VirtualHost *:80>
+    ServerName vocab.ox.ac.uk
+
+    # Logfiles
+    ErrorLog  /opt/webui/apachelog/error.log
+    CustomLog /opt/webui/apachelog/access.log combined
+ 
+    # Use only 1 Python sub-interpreter.  Multiple sub-interpreters
+    # play badly with C extensions.
+    WSGIApplicationGroup %{GLOBAL}
+    WSGIPassAuthorization On
+    # Setup mod_wsgi
+    WSGIScriptAlias / /opt/webui/mod_wsgi/dispatch.wsgi
+
+    <Directory /opt/webui/mod_wsgi>
+    Order deny,allow
+    Allow from all
+    </Directory>
+
+</VirtualHost>

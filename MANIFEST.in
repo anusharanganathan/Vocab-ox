@@ -1,0 +1,3 @@
+include webui/config/deployment.ini_tmpl
+recursive-include webui/public *
+recursive-include webui/templates *

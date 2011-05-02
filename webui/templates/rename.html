@@ -1,0 +1,33 @@
+# -*- coding: utf-8 -*-
+<%!
+  nav_selection = None
+  main_title = 'vocab.ox.ac.uk'
+%>
+
+<%inherit file="/base.html" />
+<h2>Change vocabulary properties</h2>
+
+% if c.message:
+  <div class="flash">
+  <p>${c.message | n}</p>
+  </div>
+% endif
+
+<p>Current vocab namespace prefix : ${c.vocabprefix}</p>
+<p>
+<form action="/vocabs/rename/${c.vocabprefix}" method="POST" id="form">
+  <ul>
+    <li>
+      <label for="ns_prefix">Preferred Namespace prefix:</label>
+      <input type="text" id="ns_prefix"  name="ns_prefix" value="${c.vocabprefix}"/>
+    </li>
+    <li>
+      <label for="">Preferred Namespace URI:</label>
+      <input type="text" id="base_URI"  name="base_URI" value="${c.base_URI}"/>
+    </li>
+    <li>
+      <input type="submit" class="submit" value="Update" />
+    </li>
+  </ul>
+</form>
+</p>

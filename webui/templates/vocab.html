@@ -1,0 +1,14 @@
+# -*- coding: utf-8 -*-
+<%!
+  nav_selection = 'vocabs'
+  main_title = 'vocab.ox - Browse'
+%>
+<%inherit file="/base.html" />
+<%include file="${c.vocabfile}"/>
+##% if 'html' in c.format:
+##    <b>File is of format HTML, ${c.vocabfile}</b>
+##    <%include file="${c.vocabfile}"/>
+##% else:
+##    <h3>This vocabulary is not available in HTML</h3>
+##    <a href="${c.vocabfile}">Download ${c.vocab}</a>
+##% endif

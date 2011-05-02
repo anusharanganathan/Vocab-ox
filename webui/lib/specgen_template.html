@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html 
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:mvcb="http://webns.net/mvcb/"
+  xml:lang="en"
+> 
+
+  <head>
+    <title>%(t)s</title>
+    <meta http-equiv="content-type" content="text/xhtml+xml; charset=utf-8" />
+    <link rel="mvcb:generatorAgent" type="application/rdf+xml" title="DOAP" href="http://rdfohloh.wikier.org/project/specgen" />
+    <link rel="stylesheet" type="text/css" href="http://example.org/style.css" />
+  </head>
+
+  <body>
+
+    <h1 id="title">%(t)s</h1>
+
+    <dl>
+      <dt>Authors:</dt>
+      <dd>%(a)s</dd>
+
+      <dt>Contributors:</dt>
+      <dd>%(c)s</dd>
+    </dl>
+
+    <!-- description -->
+    <p>%(d)s</p>
+
+    <hr />
+    <!-- ===================================================================== -->
+    <h2 id="sec-glance">Summary of Terms</h2>
+
+    <p>
+      An alphabetical index of NAME terms, by class (concepts) and by property 
+      (relationships, attributes), are given below. All the terms are hyperlinked 
+      to their detailed description for quick reference.
+    </p>
+
+    <!-- The list of classes and properties goes here -->
+    %(s)s
+    <!-- End of the terms list -->
+
+    <!-- ===================================================================== -->
+    <h2 id="reference">Vocabulary classes and properties</h2>
+
+    <!-- The following is the script-generated list of classes and properties -->
+    %(i)s
+    <!-- End of the terms list -->
+
+    <!-- ===================================================================== -->
+  </body>
+
+</html>
+

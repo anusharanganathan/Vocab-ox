@@ -1,0 +1,8 @@
+/*
+	Name: IE6 fixes
+	Description: CSS Fixes for IE6 and below.
+	Coder: Enrique Ramirez
+	Coder URI: http://enrique-ramirez.com
+*/
+#banner h1 {line-height: 1;}
+#featured figure {display: inline;}

@@ -1,0 +1,46 @@
+# -*- coding: utf-8 -*-
+<%!
+  nav_selection = 'publish'
+  main_title = 'vocab.ox - Register'
+%>
+<%inherit file="/base.html" />
+<h2>Register</h2>
+<p>Please enter your details.</p>
+% if c.message:
+  <div class="flash">
+  <p>${c.message | n}</p>
+  </div>
+% endif
+<form action="register" method="POST" id="form">
+  <ul>
+    <li>
+      <label for="name">First name:</label>
+      <input type="text" name="firstname" id="firstname" autofocus required/>
+    </li>
+    <li>
+      <label for="name">Last name: </label>
+      <input type="text" name="lastname" id="lastname" required />
+    </li>
+    <li>
+      <label for="name">Email: </label>
+      <input type="email" name="email" id="email" placeholder="ox.ac.uk emails ONLY" required />
+    </li>
+    <li>
+      <label for="name">Department: </label>
+      <input type="text" name="department" id="department" required />
+    </li>
+    <li>
+      <label for="name">Username: </label>
+      <input type="text" name="username" id="username" required/>
+    </li>
+    <li>
+      <label for="email">Password:</label>
+      <input type="password" name="password" id="password" required />
+    </li>
+    <li>
+      <input type="submit" class="submit" value="submit" />
+    </li>
+  </ul>
+</form>
+<p class="req">* All fields are required. Only <strong>ox.ac.uk</strong> emails are allowed.</p>
+<p>If you are already registered, please <a href="login" title="Log-in">login</a>.</p>

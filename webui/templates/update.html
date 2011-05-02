@@ -1,0 +1,77 @@
+# -*- coding: utf-8 -*-
+<%!
+  nav_selection = ''
+  main_title = 'vocab.ox - Update'
+%>
+<%inherit file="/base.html" />
+% if c.user_det and 'name' in c.user_det and c.user_det['name'] and 'uri' in c.user_det and c.user_det['uri']:
+  <h2>Details for <a href="${c.user_det['uri']}">${c.user_det['name']}</a></h2>
+% elif c.user_det and 'name' in c.user_det and c.user_det['name']:
+  <h2>Details for ${c.user_det['name']}</h2>
+% else:
+  <h2>Update Details</h2>
+% endif
+
+% if c.message:
+  <div class="flash">
+  <p>${c.message | n}</p>
+  </div>
+% endif
+<form action="/update/${c.user_det['userid']}" method="POST" id="form">
+  <ul>
+    <li>
+      <label for="name">First name:</label>
+      <input type="text" name="firstname" id="firstname" 
+      % if 'fname' in c.user_det and c.user_det['fname']:
+          value="${c.user_det['fname']}"
+      % endif
+      autofocus required/>
+    </li>
+    <li>
+      <label for="name">Last name: </label>
+      <input type="text" name="lastname" id="lastname"
+      % if 'lname' in c.user_det and c.user_det['lname']:
+          value="${c.user_det['lname']}"
+      % endif
+      required />
+    </li>
+    <li>
+      <label for="name">Email: </label>
+      <input type="email" name="email" id="email" 
+      % if 'email' in c.user_det and c.user_det['email']:
+          value="${c.user_det['email']}"
+      % endif
+      placeholder="ox.ac.uk emails ONLY" required />
+    </li>
+    <li>
+      <label for="name">Department: </label>
+      <input type="textbox" name="department" id="department" 
+      % if 'dept' in c.user_det and c.user_det['dept']:
+        <%
+        depts = '; '.join(c.user_det['dept'])
+        %>
+        value="${depts}"
+      % endif
+      required />
+      <p>Separate multiple values with a ';'</p>
+    </li>
+    <li>
+      <label for="name">Username: </label>
+      <input type="text" name="username" id="username" 
+      % if 'userid' in c.user_det and c.user_det['userid']:
+          value="${c.user_det['userid']}"
+      % endif
+      disabled="disabled" required/>
+      % if 'userid' in c.user_det and c.user_det['userid']:
+          <input type="hidden" name="username" value="${c.user_det['userid']}" />
+      % endif
+    </li>
+    <li>
+      <label for="email">Password:</label>
+      <input type="password" name="password" id="password" required />
+    </li>
+    <li>
+      <input type="submit" class="submit" value="submit" />
+    </li>
+  </ul>
+</form>

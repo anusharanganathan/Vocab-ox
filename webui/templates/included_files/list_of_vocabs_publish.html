@@ -1,0 +1,128 @@
+# -*- coding: utf-8 -*-
+<%!
+    from webui.config.rdfconfig import vocab_editorial_descriptions
+%>
+<!--
+For each vocab
+  "Change vocab properties",      edit.png ELSE edit-white.png
+  "RDF format not available",     no_rdf.gif
+For each file in vocab
+  "Check RDF: RDF parse error",   rdf_error.gif
+  "Generate HTML",                generate.png
+  "HTML conversion error",        html-no.png
+  "Conversion to HTML successful" html-yes.png
+
+View source                       subversion_logo_48.png
+-->
+% if c.vocab_list:
+  % if c.user_det and 'name' in c.user_det and c.user_det['name'] and 'uri' in c.user_det and c.user_det['uri']:
+    <h2>List of vocabularies managed by <a href="${c.user_det['uri']}">${c.user_det['name']}</a></h2>
+  % elif c.user_det and 'name' in c.user_det and c.user_det['name']:
+    <h2>>List of vocabularies managed by ${c.user_det['name']}</h2>
+  % endif
+  <table width="95%" cellpadding="0" cellspacing="0" class="stripy">
+  <tbody>
+  <%
+    vocab_prefixes_sorted = c.vocab_list.keys()
+    vocab_prefixes_sorted.sort()
+  %>
+  ##% for v,val in c.vocab_list.iteritems():
+  % for v in vocab_prefixes_sorted:
+    <%
+      val =  c.vocab_list[v]
+      vocab_notes = []
+      files_notes = {}
+      if 'note' in val and val['note']:
+        for msg in val['note']:
+          if msg[0] == vocab_editorial_descriptions[0] or msg[0] == vocab_editorial_descriptions[1]:
+            vocab_notes.append(msg[0])
+          elif msg[0] and msg[1]:
+            if not msg[1] in files_notes:
+              files_notes[msg[1]] = [msg[0]]
+            else:
+              files_notes[msg[1]].append(msg[0])        
+    %>
+    <tr>
+      <td width="100%">
+        <a href="/${v}">
+        % if 'title' in val:
+            <b>${v} : ${val['title'][0]}</b>
+        %else:
+            <b>${v}</b>
+        % endif
+        </a>
+        <div style="float:right;">
+          % if vocab_editorial_descriptions[0] in vocab_notes:
+            <a href="/vocabs/rename/${v}"><img src="/images/edit.png" alt="${vocab_editorial_descriptions[0]} 
+              title="${vocab_editorial_descriptions[0]}"/></a>
+          % else:
+            <a href="/vocabs/rename/${v}"><img src="/images/edit-white.png" alt="Update namespace prefix / URI"
+            title="Update namespace prefix / URI"/></a>
+          % endif
+          % if vocab_editorial_descriptions[1] in vocab_notes:
+            <a href="/vocabs/rename/${v}"><img src="/images/no_rdf.gif" alt="${vocab_editorial_descriptions[1]}"
+            title="${vocab_editorial_descriptions[1]}"/></a>
+          % endif
+          <a href="${val['svn']}" target="_blank"><img src="/images/subversion_logo.png" alt="View source files"
+          title="View source files"/></a> 
+        </div>
+        <div class="tabbed">
+        % if 'creator' in val:
+            <b>Creators : </b>
+            <% 
+                list_of_creators = ', '.join(val['creator'])
+            %>
+            ${list_of_creators | n}
+            <br/>
+        % endif
+        % if 'contributor' in val:
+            <b>Contributors : </b>
+            <% 
+                list_of_contributors = ', '.join(val['contributor'])
+            %>
+            ${list_of_contributors | n}
+            <br/>
+        % endif
+        % if 'date' in val:
+            <b>Date : </b>${val['date'][0]}<br/>
+        % endif
+        % if 'version' in val:
+            <b>Version : </b>${val['version'][0]}
+        % endif
+        </div>
+        <div class="tabbed">
+        % if 'files' in val:
+            <ul>
+            % for f, fvals in val['files'].iteritems():
+                <li>
+                % if fvals['name'] in files_notes.keys():
+                    % for msg in files_notes[fvals['name']]:
+                      % if msg == vocab_editorial_descriptions[2]:
+                        <img src="/images/rdf_error.gif" alt="${vocab_editorial_descriptions[2]}" 
+                        title="${vocab_editorial_descriptions[2]}"/>
+                      % elif msg == vocab_editorial_descriptions[3]:
+                        <a href="/vocabs/generate/${v}?file=${fvals['name']}"><img src="/images/generate.png" alt="${vocab_editorial_descriptions[3]}"
+                        title="${vocab_editorial_descriptions[3]}"/></a>  
+                      % elif msg == vocab_editorial_descriptions[4]:
+                        <img src="/images/html-no.png" alt="${vocab_editorial_descriptions[4]}" title="${vocab_editorial_descriptions[4]}"/>
+                      ##% elif msg == vocab_editorial_descriptions[5]:
+                      ##  <img src="/images/html-yes.png" alt="${vocab_editorial_descriptions[5]}" title="${vocab_editorial_descriptions[5]}"/>
+                      % endif  
+                    % endfor
+                % endif
+                <a href="${f}">${fvals['name']}</a>
+                % if fvals['format']:
+                    (${fvals['format']})
+                % endif
+                </li>
+            % endfor
+            </ul>
+        % endif
+        </div>
+      </td>
+    </tr>
+  % endfor
+  </tbody>
+  </table>
+% endif
+

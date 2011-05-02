@@ -1,0 +1,33 @@
+# -*- coding: utf-8 -*-
+% if c.user_det:
+  <div>
+  % if c.user_det and 'name' in c.user_det and c.user_det['name'] and 'uri' in c.user_det and c.user_det['uri']:
+    <h2>Details for <a href="${c.user_det['uri']}">${c.user_det['name']}</a></h2>
+  % elif c.user_det and 'name' in c.user_det and c.user_det['name']:
+    <h2>Details for ${c.user_det['name']}</h2>
+  % endif
+  <ul>
+    % if 'title' in c.user_det and c.user_det['title']:
+      <li><label for="name">Title: </label>${c.user_det['title']}</li>
+    % endif
+    % if 'fname' in c.user_det and c.user_det['fname']:
+      <li><label for="name">First name: </label>${c.user_det['fname']}</li>
+    % endif
+    % if 'lname' in c.user_det and c.user_det['lname']:
+      <li><label for="name">Last name: </label>${c.user_det['lname']}</li>
+    % endif
+    % if 'email' in c.user_det and c.user_det['email']:
+      <li><label for="name">Email: </label>${c.user_det['email']}</li>
+    % endif
+    % if 'dept' in c.user_det and c.user_det['dept']:
+      <%
+      depts = '; '.join(c.user_det['dept'])
+      %>
+      <li><label for="name">Department: </label>${depts}</li>
+    % endif
+    % if c.show_userid and 'userid' in c.user_det and c.user_det['userid']:
+      <li><label for="name">Username: </label>${c.user_det['userid']}</li>
+    % endif
+  </ul>
+  </div>
+% endif

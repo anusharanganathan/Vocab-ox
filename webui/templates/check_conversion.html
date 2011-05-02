@@ -1,0 +1,75 @@
+# -*- coding: utf-8 -*-
+<%!
+  nav_selection = 'login'
+  main_title = 'vocab.ox - publish vocab'
+%>
+<%inherit file="/base.html" />
+<h2>${c.vocabprefix}</h2>
+<h3>Converting rdf file to html</h3>
+<h4>Stage 1: Checking rdf file to convert to html</h4>
+
+<%def name="flash()">
+    % if session.has_key('conversion_flash'):
+        <div id="flash" class="flash">
+        <p>${session.get('conversion_flash') | n}</p><p>&nbsp;</p>
+        </div><p>&nbsp;</p>
+        <%
+            del session['conversion_flash']
+            session.save()
+        %>
+    % endif
+</%def>
+
+${self.flash()}
+
+% if c.create_message:
+<div class="flash">
+<p>${c.create_message | n}</p>
+</div>
+% endif
+
+<!--<h5>Must have properties in ${c.vocabpefix} to convert to html</h5> -->
+% if c.conforms:
+    <p>The rdf file can be converted to html using the toolset. Convert</p>
+% else:
+  <form action="/vocabs/modify_rdf/${c.vocabprefix}?file=${c.filename}" method=POST>
+  <table>
+  % if c.properties:
+    % for k, vals in c.properties.iteritems():
+        <tr>
+        <td><b>${k}</b> :</td>
+        <td> 
+        % if k == 'Identifier' or k == 'Vocabulary namespace URI':
+            <%
+                if k == 'Identifier':
+                    fld_name = 'identifier'
+                else:
+                    fld_name = 'namespace_uri'
+                value = ''
+                if vals:
+                    value = vals[0]
+            %>
+            <input type="text" name="${fld_name}" value=${value}>
+        % elif vals:
+            % for v in vals:
+                ${v}
+            % endfor
+        % else:
+            Not available
+        % endif
+        </td></tr>
+    % endfor
+  % endif
+  <tr>
+  <td><b>Classes, properties and terms defined by namespace URI :</b></td>
+  % if c.definitions:
+    <td>Yes</td>
+  % else:
+    <td>No</td>
+  % endif
+  </tr>
+  </table>
+  <input type="submit" class="submit" value="Modify">
+  </form>
+% endif
+

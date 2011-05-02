@@ -1,0 +1,86 @@
+# -*- coding: utf-8 -*-
+% if c.vocab_list:
+  <table width="95%" cellpadding="0" cellspacing="0" class="stripy">
+  <tbody>
+  <%
+    vocab_prefixes_sorted = c.vocab_list.keys()
+    vocab_prefixes_sorted.sort()
+  %>
+    ##% for v,val in c.vocab_list.iteritems():
+    % for v in vocab_prefixes_sorted:
+      <%
+         val = c.vocab_list[v]
+      %>
+      <%
+        display = True
+        if 'mediators' in val:
+            for cid, cvals in val['mediators'].iteritems():
+                if cvals['name'] == 'Anusha Ranganathan':
+                    display = False
+      %>
+      % if display:
+        <tr>
+        <td width="100%">
+        <a href="/${v}">
+        % if 'title' in val:
+            <b>${v} : ${val['title'][0]}</b>
+        %else:
+            <b>${v}</b>
+        % endif
+        </a>
+        <div class="tabbed">
+        % if 'creator' in val:
+            <b>Creators : </b>
+            <% 
+                list_of_creators = ', '.join(val['creator'])
+            %>
+            ${list_of_creators | n}
+            <br/>
+        % endif
+        % if 'contributor' in val:
+            <b>Contributors : </b>
+            <% 
+                list_of_contributors = ', '.join(val['contributor'])
+            %>
+            ${list_of_contributors | n}
+            <br/>
+        % endif
+        % if 'mediators' in val:
+            <b>Maintained by : </b>
+            <% 
+                mediators = []
+                for cid, cvals in val['mediators'].iteritems():
+                    mediators.append("""<a href="%s">%s</a>"""%(cvals['uri'], cvals['name']))
+                mediators = ', '.join(mediators)
+            %>
+            ${mediators | n}
+            <br/>
+        % endif
+        % if 'date' in val:
+            <b>Date : </b>${val['date'][0]}<br/>
+        % endif
+        % if 'version' in val:
+            <b>Version : </b>${val['version'][0]}
+        % endif
+        </div>
+        <div class="tabbed">
+        % if 'files' in val:
+            <ul>
+            % for f, fvals in val['files'].iteritems():
+                <li>
+                <a href="${f}">${fvals['name']}</a>
+                % if fvals['format']:
+                    (${fvals['format']}) 
+                % endif
+                </li>
+            % endfor
+            </ul>
+        % endif
+        </div>
+        </td>
+        </tr>
+      % endif
+    % endfor
+  </tbody>
+  </table>
+% endif

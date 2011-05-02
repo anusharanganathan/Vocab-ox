@@ -1,0 +1,17 @@
+# -*- coding: utf-8 -*-
+<h2>Add a new vocabulary</h2>
+% if c.create_message:
+<p>${c.create_message | n}</p>
+% endif
+<form action="/vocabs/create" enctype="multipart/form-data" method="POST">
+    <label>Upload Vocab (rdf file):</label> 
+    <input type="file" name="vocabfile" class="submit"/>
+    <input type="submit" class="submit" value="Submit" />
+</form>
+<form action="/vocabs/create" method="POST">
+    <label>OR</label><br />
+    <label>Provide Url (prefferrably pointing to the rdf file):</label>
+    <input type="text" name="retrieveurl" class="submit"/>
+    <input type="submit" class="submit" value="Submit" />
+    <!-- <label>Preferred URI subaddress for the vocab (also used as the namespace prefix):</label> <input type="text" name="prefix" /> <br />-->
+</form>

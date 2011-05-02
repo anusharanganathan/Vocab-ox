@@ -1,0 +1,126 @@
+/* start styling */
+.body {
+	clear: both;
+	margin: 0 auto;
+	width: 800px;
+}
+/* Lists */
+ul {
+	padding: 0;
+	list-style: outside disc;
+	margin: 1em 0 1.5em 1.5em;
+}
+
+/* HTML5 tags */
+header, nav {
+	display: block;
+	font-size: 87.5%; /* Base font size: 14px */
+	font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	line-height: 1.429;
+	text-align: left;
+	
+}
+
+/*
+	Header
+*****************/
+#banner {
+	margin-top: 0;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+	padding-top: 0.5em;
+	padding-right: 0;
+	padding-bottom: 0.1em;
+	padding-left: 0;
+	
+}
+/* Banner */
+	#banner h1 {
+	font-size: 2.5em;
+	line-height: .6;
+	padding-top:10px;
+}
+#banner img {
+	float: left;
+	margin: 0 10px 10px -8px;
+}
+#banner h1 a:link, #banner h1 a:visited {
+	color: #000305;
+	display: block;
+	font-weight: bold;
+	margin: 0 0 0.5em .2em;
+	text-decoration: none;
+}
+#banner h1 a:hover, #banner h1 a:active {
+	background: none;
+	color: #069;
+	text-shadow: none;
+}
+#banner h1 strong {
+	font-size: 0.5em;
+	font-weight: normal;
+	text-align: right;
+}
+/* Main Nav */
+	#banner nav {
+	background: #000305;
+	font-size: 1.143em;
+	height: 40px;
+	line-height: 30px;
+	margin: 0 auto 2em auto;
+	padding: 0;
+	text-align: center;
+	width: 800px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+#banner nav ul {
+	list-style: none;
+	margin: 0 auto;
+	width: 800px;
+}
+#banner nav li {
+	float: left;
+	display: inline;
+	margin: 0;
+}
+#banner nav a:link, #banner nav a:visited {
+	color: #fff;
+	display: inline-block;
+	height: 30px;
+	padding: 5px 1.5em;
+	text-decoration: none;
+}
+#banner nav a:active,  #banner nav .active a:link, #banner nav .active a:visited {
+	background: #069;
+	color: #fff;
+	text-shadow: none !important;
+}
+#banner nav a:hover, #banner nav .active a:hover {
+	background: #5A7FAD;
+	color: #fff;
+	text-shadow: none !important;
+}
+#banner nav li:first-child a {
+	border-top-left-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-webkit-border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+}
+/* sticky on top of page */
+#top-bar {
+  position: fixed;
+  margin:0;
+  padding:0;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+}
+#topbar-inner {
+  background: #fff;
+}
