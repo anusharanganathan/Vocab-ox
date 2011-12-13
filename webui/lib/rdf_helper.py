@@ -1,6 +1,7 @@
 import uuid, codecs, os, mimetypes
 from collections import defaultdict
-from rdflib.Graph import ConjunctiveGraph as Graph
+#from rdflib.Graph import ConjunctiveGraph as Graph
+from rdflib import ConjunctiveGraph as Graph
 from rdflib import Literal, URIRef
 from webui.config.rdfconfig import namespaces, vocab_description, vocab_description_uri, vocab_editorial_descriptions 
 from webui.lib.utils import get_file_mimetype
@@ -23,8 +24,8 @@ def add_mediator(params):
     if 'title' in params and params['title']:
         graph.add((uri, namespaces['foaf']['title'], Literal(params['title'])))
     if 'department' in params and params['department']:
-        department = department.split(';')
-        for d in deparmtnet:
+        department = params['department'].split(';')
+        for d in department:
             graph.add((uri, namespaces['dcterms']['isPartOf'], Literal(d.strip())))
     rdf_str = None
     rdf_str = graph.serialize()

@@ -28,7 +28,7 @@ def make_map(config):
     map.connect("/logout", controller='account', action='logout')
     map.connect("/register", controller='account', action='register')
     map.connect("/welcome", controller='account', action='welcome')
-    map.connect("/update/{userid}", controller='account', action='update')
+    map.connect("/update", controller='account', action='update')
     map.connect("/owner/{owner_uuid}", controller='vocabs', action='owner')
 
     # routes to static pages

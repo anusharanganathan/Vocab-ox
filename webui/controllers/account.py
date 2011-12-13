@@ -27,22 +27,22 @@ class AccountController(BaseController):
             return redirect('login', code=303)
         return render('/register.html')
 
-    def update(self, userid):
+    def update(self):
         identity = request.environ.get("repoze.who.identity")
-        came_from = "/update/%s"%userid
         if not identity:
+            came_from = "/update"
             session['login_flash'] = "Please login to update your details"
             session.save()
             destination = "/login?came_from=%s"%came_from
             return redirect(destination, code=303)
-        if not (identity['repoze.who.userid'] == userid):
-            session['browse_flash'] = "You are not authorized to change the registration details for %s"%userid
-            session.save()
-            return redirect(url(controller='vocabs', action='index'), code=303)
+        userid = identity['repoze.who.userid']
+        #if not (identity['repoze.who.userid'] == userid):
+        #    session['browse_flash'] = "You are not authorized to change the registration details for %s"%userid
+        #    session.save()
+        #    return redirect(url(controller='vocabs', action='index'), code=303)
         params = request.POST
         if not ('firstname' in params and params['firstname']) and \
            not ('lastname' in params and params['lastname']) and \
-           not ('title' in params and params['title']) and \
            not ('email' in params and params['email']) and \
            not ('dept' in params and params['dept']) and \
            not ('password' in params and params['password']):
@@ -76,6 +76,9 @@ class AccountController(BaseController):
 
     def welcome(self):
         identity = request.environ.get("repoze.who.identity")
+        if not identity:
+            abort(401)
+        
         came_from = request.params.get('came_from', '') or "/"
         if identity:
             # Login succeeded

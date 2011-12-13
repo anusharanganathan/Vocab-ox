@@ -29,5 +29,8 @@
       <li><label for="name">Username: </label>${c.user_det['userid']}</li>
     % endif
   </ul>
+  <form method="POST" enctype="multipart/form-data" action="/update">
+    <input type="submit" value="Update your details" class="submit">
+  </form>
   </div>
 % endif
