@@ -119,8 +119,9 @@ class AdminController(BaseController):
             newvocabdir = "%s/%s"%(ag.vocabulariesdir, ns_prefix)
             if os.path.isdir(newvocabdir):
                 message = []
-                message.append("""Extracted the namespace prefix <b>%s</b> from the vocabulary file. \
-A vocabulary already exists with this obtained prefix. \
+                message.append("""Vocabulary added to <a href="http://vocab.ox.ac.uk/%s">%s</a>"""%c.vocabprefix)
+                message.append("""Extracted the namespace prefix <b>%s</b> from the \
+vocabulary file. A vocabulary already exists with this obtained prefix. \
 See <a href="http://vocab.ox.ac.uk/%s">%s</a>"""%(ns_prefix, ns_prefix, ns_prefix))
             else:
                 using_uuid = False

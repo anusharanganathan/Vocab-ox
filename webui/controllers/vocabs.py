@@ -75,10 +75,10 @@ class VocabsController(BaseController):
                             c.vocabfile = v['path'].replace('/opt', '')
                             return render('/vocab.html')
                 elif str(mimetype).lower() in ['application/rdf+xml', "text/xml", "text/rdf+n3", "application/x-turtle", \
-                                               "text/rdf+ntriples", "text/rdf+nt", "text/plain"]:
+                "text/rdf+ntriples", "text/rdf+nt", "text/plain"]:
                     for f, v in files.iteritems():
                         if v['format'].lower() in ['application/rdf+xml', 'text/xml', "text/rdf+n3", "application/x-turtle", \
-                                                   "text/rdf+ntriples", "text/rdf+nt", "text/plain"]:
+                        "text/rdf+ntriples", "text/rdf+nt", "text/plain"]:
                             response.content_type = '%s; charset="UTF-8"'%str(mimetype)
                             response.status_int = 200
                             response.status = "200 OK"
